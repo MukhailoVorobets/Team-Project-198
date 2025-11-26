@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-reviews-table
+      author: mykhailo
+      changes:
+        - createTable:
+            tableName: reviews
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rating
+                  type: decimal(2,1)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: varchar(1024)
+              - column:
+                  name: date
+                  type: datetime
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: reviews
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_reviews_user
+        - addForeignKeyConstraint:
+            baseTableName: reviews
+            baseColumnNames: book_id
+            referencedTableName: books
+            referencedColumnNames: id
+            constraintName: fk_reviews_book
