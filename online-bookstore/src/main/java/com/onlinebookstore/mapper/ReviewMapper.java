@@ -9,7 +9,7 @@ import org.mapstruct.Mapping;
 
 @Mapper(config = MapperConfig.class, componentModel = "spring")
 public interface ReviewMapper {
-//    Review toModel(CreateReviewRequestDto requestDto);
+    //    Review toModel(CreateReviewRequestDto requestDto);
 
     @Mapping(source = "book.id", target = "bookId")
     @Mapping(source = "user.id", target = "userId")

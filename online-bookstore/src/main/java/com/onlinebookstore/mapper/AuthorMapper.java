@@ -9,8 +9,11 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(config = MapperConfig.class, componentModel = "spring")
 public interface AuthorMapper {
+
     Author toModel(CreateAuthorRequestDto requestDto);
+
     AuthorResponseDto toDto(Author author);
+
     void updateAuthor(CreateAuthorRequestDto requestDto, @MappingTarget Author author);
 }
 

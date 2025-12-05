@@ -5,11 +5,10 @@ import com.onlinebookstore.dto.authors.CreateAuthorRequestDto;
 import com.onlinebookstore.mapper.AuthorMapper;
 import com.onlinebookstore.model.Author;
 import com.onlinebookstore.repository.AuthorRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -37,10 +36,10 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorResponseDto update(Long authorId ,CreateAuthorRequestDto requestDto) {
+    public AuthorResponseDto update(Long authorId, CreateAuthorRequestDto requestDto) {
         Author author = authorRepository.findById(authorId).orElseThrow(
                 () -> new RuntimeException("Author not found"));
-        authorMapper.updateAuthor(requestDto,  author);
+        authorMapper.updateAuthor(requestDto, author);
         return authorMapper.toDto(authorRepository.save(author));
     }
 

@@ -1,6 +1,11 @@
 package com.onlinebookstore.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -21,5 +26,5 @@ public class Category {
     private String categoryName;
 
     @Column(name = "is_deleted", columnDefinition = "TINYINT", nullable = false)
-    private boolean is_deleted =  false;
+    private boolean isDeleted = false;
 }
