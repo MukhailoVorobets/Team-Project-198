@@ -12,11 +12,10 @@ import com.onlinebookstore.repository.BookRepository;
 import com.onlinebookstore.repository.ReviewRepository;
 import com.onlinebookstore.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -60,7 +59,7 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewResponseDto update(Long id, Long userId, UpdateReviewRequestDto requestDto) {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() ->  new RuntimeException("Review not found"));
+                .orElseThrow(() -> new RuntimeException("Review not found"));
 
         if (!review.getUser().getId().equals(userId)) {
             throw new RuntimeException("Access denied — only author can edit review");

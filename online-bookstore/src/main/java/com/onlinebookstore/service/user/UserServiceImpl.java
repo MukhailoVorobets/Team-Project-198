@@ -15,12 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final UserMapper userMapper;
-//    private final RoleRepository roleRepository;
-//    private final PasswordEncoder passwordEncoder;
-//    private final ShoppingCartService shoppingCartService;
+    //    private final RoleRepository roleRepository;
+    //    private final PasswordEncoder passwordEncoder;
+    //    private final ShoppingCartService shoppingCartService;
 
     @Override
-    public UserResponseDto register(UserRegistrationRequestDto request) throws RegistrationException {
+    public UserResponseDto register(UserRegistrationRequestDto request)
+            throws RegistrationException {
         return null;
     }
 }

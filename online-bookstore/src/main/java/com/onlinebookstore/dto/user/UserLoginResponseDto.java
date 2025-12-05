@@ -1,6 +1,6 @@
 package com.onlinebookstore.dto.user;
 
-public record UserLoginResponseDto (
+public record UserLoginResponseDto(
         String token
 ){
 }
