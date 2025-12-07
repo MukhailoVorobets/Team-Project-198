@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-categories-table
+      id: create-genres-table
       author: mykhailo
       changes:
         - createTable:
-            tableName: categories
+            tableName: genres
             columns:
               - column:
                   name: id
@@ -14,7 +14,13 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: category_name
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: sub
                   type: varchar(255)
                   constraints:
                     unique: true

@@ -1,8 +1,8 @@
 package com.onlinebookstore.controller;
 
-import com.onlinebookstore.dto.caregory.CategoryResponseDto;
-import com.onlinebookstore.dto.caregory.CreateCategoryRequestDto;
-import com.onlinebookstore.service.category.CategoryService;
+import com.onlinebookstore.dto.caregory.CreateGenreRequestDto;
+import com.onlinebookstore.dto.caregory.GenreResponseDto;
+import com.onlinebookstore.service.category.GenreService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,32 +18,32 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {
-    private final CategoryService categoryService;
+    private final GenreService genreService;
 
     @PostMapping
-    public CategoryResponseDto createCategory(@RequestBody CreateCategoryRequestDto requestDto) {
-        return categoryService.save(requestDto);
+    public GenreResponseDto createCategory(@RequestBody CreateGenreRequestDto requestDto) {
+        return genreService.save(requestDto);
     }
 
     @GetMapping
-    public List<CategoryResponseDto> getAllCategories() {
-        return categoryService.findAll();
+    public List<GenreResponseDto> getAllGenres() {
+        return genreService.findAll();
     }
 
     @GetMapping("/{id}")
-    public CategoryResponseDto getCategoryById(@PathVariable Long id) {
-        return categoryService.getById(id);
+    public GenreResponseDto getGenreById(@PathVariable Long id) {
+        return genreService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public CategoryResponseDto updateCategory(@PathVariable Long id,
-                                               @RequestBody CreateCategoryRequestDto requestDto) {
-        return categoryService.update(id, requestDto);
+    public GenreResponseDto updateCategory(@PathVariable Long id,
+                                           @RequestBody CreateGenreRequestDto requestDto) {
+        return genreService.update(id, requestDto);
     }
 
     @DeleteMapping("{id}")
     public void deleteCategoryById(@PathVariable Long id) {
-        categoryService.delete(id);
+        genreService.delete(id);
     }
 
     //    @GetMapping("/{id}/books")

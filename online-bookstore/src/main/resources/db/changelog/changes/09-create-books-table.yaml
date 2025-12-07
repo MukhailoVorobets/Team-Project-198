@@ -14,7 +14,47 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: category
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slug
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: full_price
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rate
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image
                   type: varchar(255)
                   constraints:
                     nullable: false
@@ -25,30 +65,33 @@ databaseChangeLog:
                     unique: true
                     nullable: false
               - column:
-                  name: price
-                  type: decimal(10,2)
+                  name: publisher_id
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
-                  name: description
-                  type: varchar(1024)
+                  name: internal_code
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
               - column:
-                  name: format
-                  type: varchar(1024)
+                  name: series
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: year_of_publication
-                  type: int
+                  name: language
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: weight
-                  type: decimal(10,2)
+                  name: cover_type
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: availability_of_illustrations
+                  name: illustrations
                   type: boolean
                   defaultValueBoolean: false
                   constraints:
@@ -59,28 +102,18 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: language
-                  type: varchar(1024)
+                  name: weight
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: cover_type
-                  type: varchar(1024)
+                  name: in_stock
+                  type: boolean
+                  defaultValueBoolean: false
                   constraints:
                     nullable: false
               - column:
-                  name: publisher_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-              - column:
-                  name: series
-                  type: varchar(1024)
-              - column:
-                  name: stock_quantity
-                  type: int
-              - column:
-                  name: image_url
+                  name: description
                   type: varchar(1024)
               - column:
                   name: is_deleted
