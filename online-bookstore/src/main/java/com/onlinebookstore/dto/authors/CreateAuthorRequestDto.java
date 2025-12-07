@@ -10,8 +10,8 @@ public class CreateAuthorRequestDto {
     private String name;
 
     @NotBlank
-    private String bio;
+    private String image;
 
     @NotBlank
-    private String country;
+    private String description;
 }

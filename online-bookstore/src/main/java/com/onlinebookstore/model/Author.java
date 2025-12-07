@@ -25,10 +25,10 @@ public class Author {
     @Column(nullable = false)
     private String name;
 
-    private String bio;
-
     @Column(nullable = false)
-    private String country;
+    private String image;
+
+    private String description;
 
     @Column(name = "is_deleted", columnDefinition = "TINYINT", nullable = false)
     private boolean isDeleted = false;

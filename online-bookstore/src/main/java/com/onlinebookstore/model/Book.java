@@ -31,6 +31,14 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Category category;
+
+    @Column(nullable = false)
+    private String slug;
+
+    @Column(nullable = false)
     private String title;
 
     @ManyToMany
@@ -41,37 +49,44 @@ public class Book {
     )
     private Set<Author> authors = new HashSet<>();
 
-    @Column(unique = true,nullable = false)
-    private String isbn;
+    @Column(name = "full_price", nullable = false)
+    private BigDecimal fullPrice;
 
     @Column(nullable = false)
     private BigDecimal price;
 
-    private String description;
+    @Column(nullable = false)
+    private BigDecimal rate;
+
+    @Column(nullable = false)
+    private String age;
 
     @ManyToMany
     @JoinTable(
-            name = "books_categories",
+            name = "books_genres",
             joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
-    private Set<Category> categories = new HashSet<>();
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Format format;
-
-    @Column(name = "year_of_publication", nullable = false)
-    private int yearOfPublication;
+    private Set<Genre> genres = new HashSet<>();
 
     @Column(nullable = false)
-    private BigDecimal weight;
-
-    @Column(name = "availability_of_illustrations", columnDefinition = "TINYINT", nullable = false)
-    private boolean availabilityOfIllustrations = false;
+    private int year;
 
     @Column(nullable = false)
-    private int pages;
+    private String image;
+
+    @Column(unique = true,nullable = false)
+    private String isbn;
+
+    @Column(name = "internal_code", unique = true, nullable = false)
+    private String internalCode;
+
+    @ManyToOne
+    @JoinColumn(name = "publisher_id", nullable = false)
+    private Publisher publisher;
+
+    @Column(nullable = false)
+    private String series;
 
     @Column(nullable = false)
     private String language;
@@ -79,23 +94,25 @@ public class Book {
     @Column(name = "cover_type", nullable = false)
     private String coverType;
 
-    @ManyToOne
-    @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publisher;
+    @Column(columnDefinition = "TINYINT")
+    private boolean illustrations;
 
-    private String series;
+    @Column(nullable = false)
+    private int pages;
 
-    @Column(name = "stock_quantity")
-    private int stockQuantity;
+    @Column(nullable = false)
+    private String weight;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(name = "in_stock", nullable = false, columnDefinition = "TINYINT")
+    private boolean inStock;
+
+    private String description;
 
     @Column(name = "is_deleted", columnDefinition = "TINYINT", nullable = false)
     private boolean isDeleted = false;
 
-    public enum Format {
-        PAPER_BOOK,
-        ELECTRONICS_BOOK
+    public enum Category {
+        BOOK,
+        EBOOK
     }
 }

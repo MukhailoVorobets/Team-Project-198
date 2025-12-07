@@ -19,13 +19,13 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: bio
-                  type: varchar(1024)
-              - column:
-                  name: country
+                  name: image
                   type: varchar(1024)
                   constraints:
                     nullable: false
+              - column:
+                  name: description
+                  type: varchar(1024)
               - column:
                   name: is_deleted
                   type: boolean

@@ -4,8 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class CreateCategoryRequestDto {
+public class CreateGenreRequestDto {
     @NotBlank
-    private String categoryName;
+    private String name;
+    @NotBlank
+    private String sub;
 
 }

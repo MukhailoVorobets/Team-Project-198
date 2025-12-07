@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-books-categories-table
+      id: create-books-genres-table
       author: mykhailo
       changes:
         - createTable:
-            tableName: books_categories
+            tableName: books_genres
             columns:
               - column:
                   name: book_id
@@ -12,22 +12,22 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: category_id
+                  name: genre_id
                   type: BIGINT
                   constraints:
                     nullable: false
         - addPrimaryKey:
-            tableName: books_categories
-            columnNames: book_id, category_id
+            tableName: books_genres
+            columnNames: book_id, genre_id
         - addForeignKeyConstraint:
-            baseTableName: books_categories
+            baseTableName: books_genres
             baseColumnNames: book_id
             referencedTableName: books
             referencedColumnNames: id
-            constraintName: fk_books_categories_book
+            constraintName: fk_books_genres_book
         - addForeignKeyConstraint:
-            baseTableName: books_categories
-            baseColumnNames: category_id
-            referencedTableName: categories
+            baseTableName: books_genres
+            baseColumnNames: genre_id
+            referencedTableName: genres
             referencedColumnNames: id
-            constraintName: fk_books_categories_category
+            constraintName: fk_books_genres_category
