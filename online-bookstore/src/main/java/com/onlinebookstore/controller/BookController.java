@@ -1,4 +1,60 @@
 package com.onlinebookstore.controller;
 
+import com.onlinebookstore.dto.book.BookDto;
+import com.onlinebookstore.dto.book.BookSearchParameters;
+import com.onlinebookstore.dto.book.CreateBookRequestDto;
+import com.onlinebookstore.service.book.BooKService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/books")
+@RequiredArgsConstructor
 public class BookController {
+    private final BooKService bookService;
+
+    @GetMapping
+    public Page<BookDto> getAll(Pageable pageable) {
+        return bookService.findAll(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public BookDto getBookById(@PathVariable Long id) {
+        return bookService.getBookById(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookDto createBook(@RequestBody CreateBookRequestDto createBookRequestDto) {
+        return bookService.save(createBookRequestDto);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void deleteBookById(@PathVariable Long id) {
+        bookService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public BookDto updateBookById(@PathVariable Long id,
+                                  @RequestBody @Valid CreateBookRequestDto createBookRequestDto) {
+        return bookService.updateBookById(id, createBookRequestDto);
+    }
+
+    @GetMapping("/search")
+    public Page<BookDto> search(BookSearchParameters searchParameters, Pageable pageable) {
+        return bookService.search(searchParameters, pageable);
+    }
 }

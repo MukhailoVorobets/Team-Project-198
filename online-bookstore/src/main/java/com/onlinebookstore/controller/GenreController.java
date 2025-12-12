@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/genres")
 @RequiredArgsConstructor
-public class CategoryController {
+public class GenreController {
     private final GenreService genreService;
 
     @PostMapping
-    public GenreResponseDto createCategory(@RequestBody CreateGenreRequestDto requestDto) {
+    public GenreResponseDto createGenre(@RequestBody CreateGenreRequestDto requestDto) {
         return genreService.save(requestDto);
     }
 
@@ -36,13 +36,13 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public GenreResponseDto updateCategory(@PathVariable Long id,
+    public GenreResponseDto updateGenre(@PathVariable Long id,
                                            @RequestBody CreateGenreRequestDto requestDto) {
         return genreService.update(id, requestDto);
     }
 
     @DeleteMapping("{id}")
-    public void deleteCategoryById(@PathVariable Long id) {
+    public void deleteGenreById(@PathVariable Long id) {
         genreService.delete(id);
     }
 

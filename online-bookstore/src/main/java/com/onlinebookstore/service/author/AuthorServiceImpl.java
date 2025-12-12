@@ -5,9 +5,9 @@ import com.onlinebookstore.dto.authors.CreateAuthorRequestDto;
 import com.onlinebookstore.mapper.AuthorMapper;
 import com.onlinebookstore.model.Author;
 import com.onlinebookstore.repository.AuthorRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,10 +23,9 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorResponseDto> findAll() {
-        return authorRepository.findAll().stream()
-                .map(authorMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<AuthorResponseDto> findAll(Pageable pageable) {
+        return authorRepository.findAll(pageable)
+                .map(authorMapper::toDto);
     }
 
     @Override
@@ -46,5 +45,11 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void delete(Long id) {
         authorRepository.deleteById(id);
+    }
+
+    @Override
+    public Author getAuthorById(Long id) {
+        return authorRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Author not found"));
     }
 }
