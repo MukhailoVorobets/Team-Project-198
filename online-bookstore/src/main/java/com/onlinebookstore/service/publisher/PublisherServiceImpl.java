@@ -7,9 +7,9 @@ import com.onlinebookstore.mapper.PublisherMapper;
 import com.onlinebookstore.model.Publisher;
 import com.onlinebookstore.repository.PublisherRepository;
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,10 +33,9 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public List<PublisherDto> findAll() {
-        return publisherRepository.findAll().stream()
-                .map(publisherMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<PublisherDto> findAll(Pageable pageable) {
+        return publisherRepository.findAll(pageable)
+                .map(publisherMapper::toDto);
     }
 
     @Override

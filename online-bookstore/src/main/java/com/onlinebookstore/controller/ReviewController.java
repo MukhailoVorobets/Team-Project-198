@@ -5,6 +5,8 @@ import com.onlinebookstore.dto.ReviewListDto;
 import com.onlinebookstore.dto.ReviewResponseDto;
 import com.onlinebookstore.dto.UpdateReviewRequestDto;
 import com.onlinebookstore.service.ReviewService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Review management", description = "Endpoint for managing review")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/books/{id}")
@@ -23,12 +26,14 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     //    GET /api/books/{id}/reviews
+    @Operation(summary = "Get all reviews", description = "Get a list of reviews")
     @GetMapping("/reviews")
     public List<ReviewListDto> getReviews(@PathVariable Long id) {
         return reviewService.findAll(id);
     }
 
     //    POST /api/books/{id}/reviews
+    @Operation(summary = "Create review", description = "Create review")
     @PostMapping("/reviews")
     public ReviewResponseDto createReview(@PathVariable Long id,
                                           @RequestBody CreateReviewRequestDto review) {
@@ -36,6 +41,7 @@ public class ReviewController {
     }
 
     //    PUT /api/reviews/{id}
+    @Operation(summary = "Update review", description = "Update review")
     @PostMapping
     public ReviewResponseDto updateReview(@PathVariable Long id,
                                @RequestBody UpdateReviewRequestDto requestDto,
@@ -44,6 +50,7 @@ public class ReviewController {
     }
 
     //    DELETE /api/reviews/{id}
+    @Operation(summary = "Delete review", description = "Delete review")
     @DeleteMapping
     public void deleteReview(@PathVariable Long id,
                              @RequestAttribute Long userId) {
