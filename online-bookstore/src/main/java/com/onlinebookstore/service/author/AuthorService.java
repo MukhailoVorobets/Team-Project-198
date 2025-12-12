@@ -2,6 +2,7 @@ package com.onlinebookstore.service.author;
 
 import com.onlinebookstore.dto.authors.AuthorResponseDto;
 import com.onlinebookstore.dto.authors.CreateAuthorRequestDto;
+import com.onlinebookstore.model.Author;
 import java.util.List;
 
 public interface AuthorService {
@@ -15,4 +16,6 @@ public interface AuthorService {
     AuthorResponseDto update(Long authorId,CreateAuthorRequestDto requestDto);
 
     void delete(Long id);
+
+    Author getAuthorById(Long id);
 }
