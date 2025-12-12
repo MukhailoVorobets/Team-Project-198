@@ -3,6 +3,8 @@ package com.onlinebookstore.controller;
 import com.onlinebookstore.dto.authors.AuthorResponseDto;
 import com.onlinebookstore.dto.authors.CreateAuthorRequestDto;
 import com.onlinebookstore.service.author.AuthorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,43 +16,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Author management", description = "Endpoint for managing authors")
 @RestController
 @RequestMapping("/api/authors")
 @RequiredArgsConstructor
 public class AuthorController {
     private final AuthorService authorService;
-    //    GET /api/authors
-    //    Отримати список авторів
 
+    @Operation(summary = "Get all authors", description = "Get a list of all authors")
     @GetMapping
     public Page<AuthorResponseDto> getAuthors(Pageable pageable) {
         return authorService.findAll(pageable);
     }
 
-    //    GET /api/authors/{id}
-    //    Отримати автора за ID
+    @Operation(summary = "Get author by id", description = "Get author by id")
     @GetMapping("/{id}")
     public AuthorResponseDto getAuthor(@PathVariable Long id) {
         return authorService.findById(id);
     }
 
-    //    POST /api/authors
-    //    Створити автора
+    @Operation(summary = "Create new author", description = "Create new author")
     @PostMapping
     public AuthorResponseDto createAuthor(@RequestBody CreateAuthorRequestDto requestDto) {
         return authorService.save(requestDto);
     }
 
-    //    PUT /api/authors/{id}
-    //    Оновити автора
+    @Operation(summary = "Update author", description = "Update author")
     @PostMapping("{id}")
     public AuthorResponseDto updateAuthor(@PathVariable Long id,
                                           @RequestBody CreateAuthorRequestDto requestDto) {
         return authorService.update(id, requestDto);
     }
 
-    //    DELETE /api/authors/{id}
-    //    Видалити автора
+    @Operation(summary = "Delete author", description = "Delete author")
     @DeleteMapping("/{id}")
     public void deleteAuthor(@PathVariable Long id) {
         authorService.delete(id);

@@ -3,7 +3,8 @@ package com.onlinebookstore.service.category;
 import com.onlinebookstore.dto.caregory.CreateGenreRequestDto;
 import com.onlinebookstore.dto.caregory.GenreResponseDto;
 import com.onlinebookstore.model.Genre;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface GenreService {
 
@@ -11,7 +12,7 @@ public interface GenreService {
 
     GenreResponseDto getById(Long id);
 
-    List<GenreResponseDto> findAll();
+    Page<GenreResponseDto> findAll(Pageable pageable);
 
     GenreResponseDto update(Long id, CreateGenreRequestDto requestDto);
 

@@ -6,9 +6,9 @@ import com.onlinebookstore.mapper.GenreMapper;
 import com.onlinebookstore.model.Genre;
 import com.onlinebookstore.repository.GenreRepository;
 import jakarta.persistence.EntityNotFoundException;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,10 +30,9 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public List<GenreResponseDto> findAll() {
-        return genreRepository.findAll().stream()
-                .map(genreMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<GenreResponseDto> findAll(Pageable pageable) {
+        return genreRepository.findAll(pageable)
+                .map(genreMapper::toDto);
     }
 
     @Override
