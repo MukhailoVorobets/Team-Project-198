@@ -3,8 +3,9 @@ package com.onlinebookstore.controller;
 import com.onlinebookstore.dto.authors.AuthorResponseDto;
 import com.onlinebookstore.dto.authors.CreateAuthorRequestDto;
 import com.onlinebookstore.service.author.AuthorService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,8 @@ public class AuthorController {
     //    Отримати список авторів
 
     @GetMapping
-    public List<AuthorResponseDto> getAuthors() {
-        return authorService.findAll();
+    public Page<AuthorResponseDto> getAuthors(Pageable pageable) {
+        return authorService.findAll(pageable);
     }
 
     //    GET /api/authors/{id}

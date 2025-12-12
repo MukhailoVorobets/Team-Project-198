@@ -5,14 +5,12 @@ import com.onlinebookstore.dto.authors.CreateAuthorRequestDto;
 import com.onlinebookstore.mapper.AuthorMapper;
 import com.onlinebookstore.model.Author;
 import com.onlinebookstore.repository.AuthorRepository;
-import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
     private final AuthorRepository authorRepository;
@@ -25,10 +23,9 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorResponseDto> findAll() {
-        return authorRepository.findAll().stream()
-                .map(authorMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<AuthorResponseDto> findAll(Pageable pageable) {
+        return authorRepository.findAll(pageable)
+                .map(authorMapper::toDto);
     }
 
     @Override

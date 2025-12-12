@@ -3,13 +3,14 @@ package com.onlinebookstore.service.author;
 import com.onlinebookstore.dto.authors.AuthorResponseDto;
 import com.onlinebookstore.dto.authors.CreateAuthorRequestDto;
 import com.onlinebookstore.model.Author;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface AuthorService {
 
     AuthorResponseDto save(CreateAuthorRequestDto requestDto);
 
-    List<AuthorResponseDto> findAll();
+    Page<AuthorResponseDto> findAll(Pageable pageable);
 
     AuthorResponseDto findById(Long id);
 
