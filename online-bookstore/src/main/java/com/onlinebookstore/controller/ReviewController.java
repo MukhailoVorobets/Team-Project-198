@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,14 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReviewController {
     private final ReviewService reviewService;
 
-    //    GET /api/books/{id}/reviews
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Get all reviews", description = "Get a list of reviews")
     @GetMapping("/reviews")
     public List<ReviewListDto> getReviews(@PathVariable Long id) {
         return reviewService.findAll(id);
     }
 
-    //    POST /api/books/{id}/reviews
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Create review", description = "Create review")
     @PostMapping("/reviews")
     public ReviewResponseDto createReview(@PathVariable Long id,
@@ -40,7 +41,7 @@ public class ReviewController {
         return reviewService.save(id, review);
     }
 
-    //    PUT /api/reviews/{id}
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Update review", description = "Update review")
     @PostMapping
     public ReviewResponseDto updateReview(@PathVariable Long id,
@@ -49,7 +50,7 @@ public class ReviewController {
         return reviewService.update(id, userId, requestDto);
     }
 
-    //    DELETE /api/reviews/{id}
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Delete review", description = "Delete review")
     @DeleteMapping
     public void deleteReview(@PathVariable Long id,
