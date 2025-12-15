@@ -14,9 +14,10 @@ public interface AuthorService {
 
     AuthorResponseDto findById(Long id);
 
-    AuthorResponseDto update(Long authorId,CreateAuthorRequestDto requestDto);
+    AuthorResponseDto update(Long authorId, CreateAuthorRequestDto requestDto);
 
     void delete(Long id);
 
     Author getAuthorById(Long id);
+
 }
